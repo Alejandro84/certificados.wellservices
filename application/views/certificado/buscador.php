@@ -6,7 +6,7 @@
     <h1 class="h3 mb-3 font-weight-normal">Revice su certificado aqui</h1>
 
     <label for="inputEmail" class="sr-only">Codigo del certificado</label>
-    <input type="text" name="codigo" id="inputEmail" class="form-control" placeholder="Codigo del certificado" required autofocus>
+    <input type="text" name="codigo" id="inputEmail" class="form-control" placeholder="Ingrese su rut. Ej: 12345678-9" required autofocus>
     <div class="checkbox mb-3">
 
     </div>

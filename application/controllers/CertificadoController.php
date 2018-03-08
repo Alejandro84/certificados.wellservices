@@ -22,31 +22,35 @@ class CertificadoController extends CI_Controller{
 
     public function buscarCertificado()
     {
-        $codigo = $this->input->post('codigo');
+        $rut_busqueda = $this->input->post('codigo');
 
-        $data = array(
-            'codigo' => $codigo
-        );
+        $caracteres = array('-',',', '.', ' ');
+        $rut = str_replace($caracteres, '' , $rut_busqueda);
 
-        if (! $this->certificado->buscarCertificado($codigo) ) {
+        $id_cliente = $this->cliente->getIdCliente($rut);
+
+        if (! $this->certificado->buscarCertificado($id_cliente->id_cliente) ) {
             $mensaje = 'No se ha encontrado un certificado con ese codigo';
             //$this->session->set_flashdata('error', $mensaje);
 			redirect( 'certificado' );
         }else {
-            $mensaje = 'No se ha encontrado un certificado con ese codigo';
+            $mensaje = 'se ha encontrado un cliente';
             //$this->session->set_flashdata('error', $mensaje);
-			redirect( 'certificado/mostar/'. $codigo );
+			redirect( 'certificado/mostar/'. $id_cliente->id_cliente );
         }
 
     }
 
-    public function mostrarCertificado($codigo_certificado)
+    public function mostrarCertificado($id_cliente)
     {
-        $certificado = $this->certificado->getCertificado($codigo_certificado);
+        $certificados = $this->certificado->getCertificados($id_cliente);
 
         $data = array(
-            'certificado' => $certificado );
+            'certificados' => $certificados
+        );
 
+        //echo "<pre>";
+        //print_r($data);
 
         $this->load->view('template/header');
         $this->load->view('template/nav');

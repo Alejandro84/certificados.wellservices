@@ -9,12 +9,12 @@ class Certificado extends CI_Model{
     //Codeigniter : Write Less Do More
   }
 
-  public function getCertificado($codigo)
+  public function getCertificados($cliente)
   {
       $this->db->select('CE.*');
       $this->db->select('CL.*');
       $this->db->from('certificados as CE');
-      $this->db->where('CE.codigo', $codigo);
+      $this->db->where('CE.id_cliente', $cliente);
       $this->db->join('clientes as CL', 'CE.id_cliente = CL.id_cliente', 'left');
       $this->db->where('CE.estado', 1);
 
@@ -23,7 +23,7 @@ class Certificado extends CI_Model{
        if ( $q->num_rows() > 0 )
       {
          $resultado = $q->result();
-         return $resultado[0];
+         return $resultado;
 
       } else {
 
@@ -32,11 +32,11 @@ class Certificado extends CI_Model{
       }
   }
 
-  public function buscarCertificado($codigo)
+  public function buscarCertificado($id_cliente)
   {
       $this->db->select('*');
       $this->db->from('certificados');
-      $this->db->where('codigo', $codigo);
+      $this->db->where('id_cliente', $id_cliente);
       $this->db->where('estado', 1);
 
       $q = $this->db->get();
