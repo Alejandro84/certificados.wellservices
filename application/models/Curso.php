@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Categoria extends CI_Model{
+class Curso extends CI_Model{
 
   public function __construct()
   {
@@ -26,8 +26,9 @@ class Categoria extends CI_Model{
   public function getSugerencias($id_categoria)
   {
       $this->db->select('*');
-      $this->db->from('categorias');
-      $this->db->where('id_categorias');
+      $this->db->from('cursos');
+      $this->db->where('id_categoria', $id_categoria);
+      $this->db->limit(5);
 
       $q = $this->db->get();
 

@@ -11,6 +11,7 @@ class CertificadoController extends CI_Controller{
     $this->load->model('cliente');
     $this->load->model('certificado');
     $this->load->model('categoria');
+    $this->load->model('curso');
     }
 
     function index()
@@ -45,8 +46,21 @@ class CertificadoController extends CI_Controller{
     {
         $certificados = $this->certificado->getCertificados($id_cliente);
 
+        $cliente = $this->cliente->getCliente($id_cliente);
+
+        $certificadosCursos;
+
+        foreach ($certificados as $certificado) {
+
+            $certificadosCursos[] = [
+                'certificado' => $certificado,
+                'cursos' => $this->curso->getSugerencias($certificado->id_categoria)
+            ];
+        }
+
         $data = array(
-            'certificados' => $certificados
+            'cliente' => $cliente,
+            'certificados' => $certificadosCursos
         );
 
         //echo "<pre>";

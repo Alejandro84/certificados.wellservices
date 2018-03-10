@@ -12,11 +12,12 @@ class Certificado extends CI_Model{
   public function getCertificados($cliente)
   {
       $this->db->select('CE.*');
-      $this->db->select('CL.*');
+      $this->db->select('CA.categoria');
       $this->db->from('certificados as CE');
       $this->db->where('CE.id_cliente', $cliente);
-      $this->db->join('clientes as CL', 'CE.id_cliente = CL.id_cliente', 'left');
+      $this->db->join('categorias as CA', 'CE.id_categoria = CA.id_categoria', 'left');
       $this->db->where('CE.estado', 1);
+      $this->db->order_by('CE.fecha_emision', 'desc');
 
       $q = $this->db->get();
 
