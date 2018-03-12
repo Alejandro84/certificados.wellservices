@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.6.31)
 # Base de datos: certificados
-# Tiempo de Generación: 2018-03-08 01:37:14 +0000
+# Tiempo de Generación: 2018-03-12 02:25:37 +0000
 # ************************************************************
 
 
@@ -130,11 +130,24 @@ DROP TABLE IF EXISTS `cursos`;
 
 CREATE TABLE `cursos` (
   `id_curso` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `curso` int(11) DEFAULT NULL,
+  `curso` varchar(60) DEFAULT NULL,
   `id_categoria` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_curso`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `cursos` WRITE;
+/*!40000 ALTER TABLE `cursos` DISABLE KEYS */;
+
+INSERT INTO `cursos` (`id_curso`, `curso`, `id_categoria`)
+VALUES
+	(1,'Operadores de Camion pluma',1),
+	(2,'Operadores de Gruas',1),
+	(3,'Operadores de Grua orquilla',1),
+	(4,'Curso de Rigger',2),
+	(5,'Curso de armado seguro de andamios',3);
+
+/*!40000 ALTER TABLE `cursos` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 
